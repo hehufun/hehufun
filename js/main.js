@@ -63,3 +63,23 @@ window.addEventListener('DOMContentLoaded', () => {
   KEEP.printThemeInfo();
   KEEP.refresh();
 });
+
+// 添加动态标题
+var link =
+  document.querySelector('link[rel*="icon"]') || document.createElement("link");
+link.rel = "shortcut icon";
+
+document.addEventListener("visibilitychange", function () {
+  if (document.visibilityState == "hidden") {
+    normal_title = document.title;
+    document.title = "❌记得关掉❌";
+    link.href = "./images/logo1.svg";
+  } else {
+    document.title = "💓欢迎回来💓";
+    setTimeout(function () {
+      document.title = normal_title;
+    }, 1600);
+    link.href = "./images/logo.svg";
+  }
+  document.getElementsByTagName("head")[0].appendChild(link);
+});
